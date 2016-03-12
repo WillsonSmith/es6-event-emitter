@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function EventEmitter() {
   var events = {};
@@ -29,7 +29,18 @@ function EventEmitter() {
 
   return {
     mixin: function mixin(toObject) {
-      Object.assign(toObject, EventsHandlers);
+      var handlers = ['bind', 'unbind', 'trigger'];
+      if (typeof toObject === 'function') {
+        handlers.forEach(function (handler) {
+          return toObject.prototype[handler] = EventsHandlers[handler];
+        });
+      } else {
+        handlers.forEach(function (handler) {
+          return toObject[handler] = EventsHandlers[handler];
+        });
+      }
+      // When there is more support, the above can be replace with Object.assign
+      // Object.assign(toObject, EventsHandlers);
     }
   };
 }

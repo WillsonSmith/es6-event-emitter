@@ -17,7 +17,14 @@ function EventEmitter() {
 
   return {
     mixin(toObject) {
-      Object.assign(toObject, EventsHandlers);
+      let handlers = ['bind', 'unbind', 'trigger'];
+      if (typeof toObject === 'function') {
+        handlers.forEach((handler) => toObject.prototype[handler] = EventsHandlers[handler]);
+      } else {
+        handlers.forEach((handler) => toObject[handler] = EventsHandlers[handler]);
+      }
+      // When there is more support, the above can be replace with Object.assign
+      // Object.assign(toObject, EventsHandlers);
     }
   }
 }
