@@ -1,9 +1,7 @@
-'use strict';
+"use strict";
 
 function EventEmitter() {
-
   var events = {};
-
   var EventsHandlers = {
     bind: function bind(event, callback) {
       if (!events[event]) {
@@ -35,21 +33,5 @@ function EventEmitter() {
     }
   };
 }
-
-/**sample code**/
-
-var storeEvents = EventEmitter();
-var store = {
-  value: 0
-};
-
-storeEvents.mixin(store);
-
-store.bind('tick', function () {
-  this.value += 1;
-});
-console.log(store.value);
-store.trigger('tick');
-console.log(store.value);
 
 //# sourceMappingURL=eventEmitter.js.map

@@ -1,7 +1,5 @@
 function EventEmitter() {
-
   let events = {};
-
   const EventsHandlers = {
     bind(event, callback) {
       if (!events[event]) {
@@ -23,24 +21,3 @@ function EventEmitter() {
     }
   }
 }
-
-/**sample code**/
-
-let storeEvents = EventEmitter();
-let store = {
-  value: 0
-}
-
-storeEvents.mixin(store);
-
-function increaseValue() {
-  this.value += 1;
-}
-
-store.bind('tick', increaseValue);
-console.log(store.value);
-store.trigger('tick');
-console.log(store.value);
-store.unbind('tick', increaseValue);
-store.trigger('tick');
-console.log(store.value);
