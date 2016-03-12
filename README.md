@@ -24,5 +24,3 @@ store.unbind('tick', increaseValue);
 store.trigger('tick');
 console.log(store.value); // 1
 ```
-
-This uses `Object.assign` you will need a polyfill for IE support.
